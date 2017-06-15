@@ -89,7 +89,6 @@ public class HitiPPR_GetUnCleanNumber extends HitiPPR_PrinterCommandNew {
                     }
                     DecideErrorStatus();
                     break;
-                    break;
                 case ConnectionResult.SIGN_IN_REQUIRED /*4*/:
                     if (!Get_UnClean_Number_Request()) {
                         DecideNextStep(SettingStep.Step_Error);
@@ -111,7 +110,6 @@ public class HitiPPR_GetUnCleanNumber extends HitiPPR_PrinterCommandNew {
                         }
                     }
                     DecideErrorStatus();
-                    break;
                     break;
                 case ConnectionResult.RESOLUTION_REQUIRED /*6*/:
                     if (!ReadResponse(TFTP.DEFAULT_TIMEOUT)) {

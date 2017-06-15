@@ -26,7 +26,7 @@ import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-import net.bither.util.NativeUtil;
+import com.example.sonic.hitiprinter.net.bither.util.NativeUtil;
 import org.apache.commons.net.io.Util;
 import org.xmlpull.v1.XmlPullParser;
 
@@ -223,7 +223,7 @@ public class FileUtility {
         }
     }
 
-    public static String ReadFile(String strFilePath) {
+    public static String ReadFile(String strFilePath) throws IOException {
         IOException e;
         File file = new File(strFilePath);
         String strLine = XmlPullParser.NO_NAMESPACE;
@@ -232,46 +232,25 @@ public class FileUtility {
         BufferedReader bReader = null;
         try {
             FileReader fReader2 = new FileReader(file);
-            try {
-                BufferedReader bReader2 = new BufferedReader(fReader2);
-                while (true) {
-                    try {
-                        strLine = bReader2.readLine();
-                        if (strLine == null) {
-                            break;
-                        }
-                        text.append(strLine + "\n");
-                    } catch (IOException e2) {
-                        e = e2;
-                        bReader = bReader2;
-                        fReader = fReader2;
+            BufferedReader bReader2 = new BufferedReader(fReader2);
+            while (true) {
+                try {
+                    strLine = bReader2.readLine();
+                    if (strLine == null) {
+                        break;
                     }
+                    text.append(strLine + "\n");
+                } catch (IOException e2) {
+                    e = e2;
+                    bReader = bReader2;
+                    fReader = fReader2;
                 }
-                bReader = bReader2;
-                fReader = fReader2;
-            } catch (IOException e3) {
-                e = e3;
-                fReader = fReader2;
-                e.printStackTrace();
-                if (bReader != null) {
-                    try {
-                        bReader.close();
-                    } catch (IOException e4) {
-                        e4.printStackTrace();
-                    }
-                }
-                if (fReader != null) {
-                    try {
-                        fReader.close();
-                    } catch (IOException e42) {
-                        e42.printStackTrace();
-                    }
-                }
-                return text.toString();
             }
+            bReader = bReader2;
+            fReader = fReader2;
         } catch (IOException e5) {
-            e42 = e5;
-            e42.printStackTrace();
+            e = e5;
+            e.printStackTrace();
             if (bReader != null) {
                 bReader.close();
             }

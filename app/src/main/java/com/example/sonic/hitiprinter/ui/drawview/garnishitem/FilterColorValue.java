@@ -1,6 +1,6 @@
 package com.example.sonic.hitiprinter.ui.drawview.garnishitem;
 
-import com.hiti.ImageFilter.ImageFilter.IMAGE_FILTER_TYPE;
+import com.example.sonic.hitiprinter.ImageFilter.ImageFilter.IMAGE_FILTER_TYPE;
 import com.example.sonic.hitiprinter.utility.MathUtility;
 
 public class FilterColorValue {

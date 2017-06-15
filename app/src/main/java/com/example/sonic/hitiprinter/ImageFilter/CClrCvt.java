@@ -252,7 +252,7 @@ public class CClrCvt {
         int i = P1_Pos.rgbBlue;
         int[] iArr2 = this.m_pTB33;
         int i2 = P1_Pos.rgbGreen;
-        int Pos = ((r0[r0] + r0[r0]) + P1_Pos.rgbRed) * 3;
+        int Pos = ((iArr[i] + iArr2[i]) + P1_Pos.rgbRed) * 3;
         P1_Val.rgbRed = this.buffer[Pos] & TelnetOption.MAX_OPTION_VALUE;
         P1_Val.rgbGreen = this.buffer[Pos + 1] & TelnetOption.MAX_OPTION_VALUE;
         P1_Val.rgbBlue = this.buffer[Pos + 2] & TelnetOption.MAX_OPTION_VALUE;
@@ -260,7 +260,7 @@ public class CClrCvt {
         i = P2_Pos.rgbBlue;
         iArr2 = this.m_pTB33;
         i2 = P2_Pos.rgbGreen;
-        Pos = ((r0[r0] + r0[r0]) + P2_Pos.rgbRed) * 3;
+        Pos = ((iArr[i] + iArr2[i2]) + P2_Pos.rgbRed) * 3;
         P2_Val.rgbRed = this.buffer[Pos] & TelnetOption.MAX_OPTION_VALUE;
         P2_Val.rgbGreen = this.buffer[Pos + 1] & TelnetOption.MAX_OPTION_VALUE;
         P2_Val.rgbBlue = this.buffer[Pos + 2] & TelnetOption.MAX_OPTION_VALUE;
@@ -268,7 +268,7 @@ public class CClrCvt {
         i = P3_Pos.rgbBlue;
         iArr2 = this.m_pTB33;
         i2 = P3_Pos.rgbGreen;
-        Pos = ((r0[r0] + r0[r0]) + P3_Pos.rgbRed) * 3;
+        Pos = ((iArr[i] + iArr2[i2]) + P3_Pos.rgbRed) * 3;
         P3_Val.rgbRed = this.buffer[Pos] & TelnetOption.MAX_OPTION_VALUE;
         P3_Val.rgbGreen = this.buffer[Pos + 1] & TelnetOption.MAX_OPTION_VALUE;
         P3_Val.rgbBlue = this.buffer[Pos + 2] & TelnetOption.MAX_OPTION_VALUE;
@@ -276,7 +276,7 @@ public class CClrCvt {
         i = P4_Pos.rgbBlue;
         iArr2 = this.m_pTB33;
         i2 = P4_Pos.rgbGreen;
-        Pos = ((r0[r0] + r0[r0]) + P4_Pos.rgbRed) * 3;
+        Pos = ((iArr[i] + iArr2[i2]) + P4_Pos.rgbRed) * 3;
         P4_Val.rgbRed = this.buffer[Pos] & TelnetOption.MAX_OPTION_VALUE;
         P4_Val.rgbGreen = this.buffer[Pos + 1] & TelnetOption.MAX_OPTION_VALUE;
         P4_Val.rgbBlue = this.buffer[Pos + 2] & TelnetOption.MAX_OPTION_VALUE;

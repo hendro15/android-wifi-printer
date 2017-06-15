@@ -510,12 +510,6 @@ public abstract class HitiPPR_PrinterCommand extends Thread {
                 CloseSocket();
                 bRet = false;
                 this.m_bDirty3Times += SEND_JPEG;
-            } catch (IOException e15) {
-                e5 = e15;
-                e5.printStackTrace();
-                CloseSocket();
-                bRet = false;
-                this.m_bDirty3Times += SEND_JPEG;
             }
             this.m_bDirty3Times += SEND_JPEG;
         }

@@ -2,8 +2,8 @@ package com.example.sonic.hitiprinter.bitmapmanager;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import com.hiti.utility.resource.ResourceSearcher;
-import com.hiti.utility.resource.ResourceSearcher.RS_TYPE;
+import com.example.sonic.hitiprinter.utility.resource.ResourceSearcher;
+import com.example.sonic.hitiprinter.utility.resource.ResourceSearcher.RS_TYPE;
 import org.xmlpull.v1.XmlPullParser;
 
 public class BitmapMonitorResult {

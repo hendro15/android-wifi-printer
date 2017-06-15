@@ -1478,7 +1478,12 @@ public class ImageFilter {
         int tc = 0;
         int tr = 0;
         int tl = 0;
-        int i = 0;
+        int ibc = 0;
+        int ibl = 0;
+        int ibr = 0;
+        int icl = 0;
+        int icr = 0;
+        int itc = 0;
         int w_r = w - radius;
         int cur_line_idx;
         int nxt_line_idx;
@@ -1493,8 +1498,8 @@ public class ImageFilter {
                     cr = blurPixels[cur_line_idx + r];
                     br = blurPixels[nxt_line_idx + r];
                     bc = blurPixels[nxt_line_idx];
-                    i = cr & TelnetOption.MAX_OPTION_VALUE;
-                    blurPixels[cur_line_idx] = ((ViewCompat.MEASURED_STATE_MASK | (((((br & TelnetOption.MAX_OPTION_VALUE) + (bc & TelnetOption.MAX_OPTION_VALUE)) + r0) / 3) & TelnetOption.MAX_OPTION_VALUE)) | (((((MotionEventCompat.ACTION_POINTER_INDEX_MASK & br) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & bc)) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & cr)) / 3) & MotionEventCompat.ACTION_POINTER_INDEX_MASK)) | (((((16711680 & br) + (16711680 & bc)) + (16711680 & cr)) / 3) & 16711680);
+                    icr = cr & TelnetOption.MAX_OPTION_VALUE;
+                    blurPixels[cur_line_idx] = ((ViewCompat.MEASURED_STATE_MASK | (((((br & TelnetOption.MAX_OPTION_VALUE) + (bc & TelnetOption.MAX_OPTION_VALUE)) + icr) / 3) & TelnetOption.MAX_OPTION_VALUE)) | (((((MotionEventCompat.ACTION_POINTER_INDEX_MASK & br) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & bc)) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & cr)) / 3) & MotionEventCompat.ACTION_POINTER_INDEX_MASK)) | (((((16711680 & br) + (16711680 & bc)) + (16711680 & cr)) / 3) & 16711680);
                     cur_line_idx++;
                     nxt_line_idx++;
                 }
@@ -1504,10 +1509,10 @@ public class ImageFilter {
                     bc = blurPixels[nxt_line_idx];
                     cl = blurPixels[cur_line_idx - r];
                     cr = blurPixels[cur_line_idx + r];
-                    i = bc & TelnetOption.MAX_OPTION_VALUE;
-                    i = cl & TelnetOption.MAX_OPTION_VALUE;
-                    i = cr & TelnetOption.MAX_OPTION_VALUE;
-                    blurPixels[cur_line_idx] = ((ViewCompat.MEASURED_STATE_MASK | (((((((bl & TelnetOption.MAX_OPTION_VALUE) + (br & TelnetOption.MAX_OPTION_VALUE)) + r0) + r0) + r0) / 5) & TelnetOption.MAX_OPTION_VALUE)) | (((((((MotionEventCompat.ACTION_POINTER_INDEX_MASK & bl) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & br)) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & bc)) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & cl)) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & cr)) / 5) & MotionEventCompat.ACTION_POINTER_INDEX_MASK)) | (((((((16711680 & bl) + (16711680 & br)) + (16711680 & bc)) + (16711680 & cl)) + (16711680 & cr)) / 5) & 16711680);
+                    ibc = bc & TelnetOption.MAX_OPTION_VALUE;
+                    icl = cl & TelnetOption.MAX_OPTION_VALUE;
+                    icr = cr & TelnetOption.MAX_OPTION_VALUE;
+                    blurPixels[cur_line_idx] = ((ViewCompat.MEASURED_STATE_MASK | (((((((bl & TelnetOption.MAX_OPTION_VALUE) + (br & TelnetOption.MAX_OPTION_VALUE)) + ibc) + icl) + icr) / 5) & TelnetOption.MAX_OPTION_VALUE)) | (((((((MotionEventCompat.ACTION_POINTER_INDEX_MASK & bl) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & br)) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & bc)) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & cl)) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & cr)) / 5) & MotionEventCompat.ACTION_POINTER_INDEX_MASK)) | (((((((16711680 & bl) + (16711680 & br)) + (16711680 & bc)) + (16711680 & cl)) + (16711680 & cr)) / 5) & 16711680);
                     cur_line_idx++;
                     nxt_line_idx++;
                 }
@@ -1515,8 +1520,8 @@ public class ImageFilter {
                     cl = blurPixels[cur_line_idx - r];
                     bl = blurPixels[nxt_line_idx - r];
                     bc = blurPixels[nxt_line_idx];
-                    i = cl & TelnetOption.MAX_OPTION_VALUE;
-                    blurPixels[cur_line_idx] = ((ViewCompat.MEASURED_STATE_MASK | (((((bl & TelnetOption.MAX_OPTION_VALUE) + (bc & TelnetOption.MAX_OPTION_VALUE)) + r0) / 3) & TelnetOption.MAX_OPTION_VALUE)) | (((((MotionEventCompat.ACTION_POINTER_INDEX_MASK & bl) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & bc)) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & cl)) / 3) & MotionEventCompat.ACTION_POINTER_INDEX_MASK)) | (((((16711680 & bl) + (16711680 & bc)) + (16711680 & cl)) / 3) & 16711680);
+                    icl = cl & TelnetOption.MAX_OPTION_VALUE;
+                    blurPixels[cur_line_idx] = ((ViewCompat.MEASURED_STATE_MASK | (((((bl & TelnetOption.MAX_OPTION_VALUE) + (bc & TelnetOption.MAX_OPTION_VALUE)) + icl) / 3) & TelnetOption.MAX_OPTION_VALUE)) | (((((MotionEventCompat.ACTION_POINTER_INDEX_MASK & bl) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & bc)) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & cl)) / 3) & MotionEventCompat.ACTION_POINTER_INDEX_MASK)) | (((((16711680 & bl) + (16711680 & bc)) + (16711680 & cl)) / 3) & 16711680);
                     cur_line_idx++;
                     nxt_line_idx++;
                 }
@@ -1531,10 +1536,10 @@ public class ImageFilter {
                     cr = blurPixels[cur_line_idx + r];
                     br = blurPixels[nxt_line_idx + r];
                     bc = blurPixels[nxt_line_idx];
-                    i = br & TelnetOption.MAX_OPTION_VALUE;
-                    i = bc & TelnetOption.MAX_OPTION_VALUE;
-                    i = cr & TelnetOption.MAX_OPTION_VALUE;
-                    blurPixels[cur_line_idx] = ((ViewCompat.MEASURED_STATE_MASK | (((((((tr & TelnetOption.MAX_OPTION_VALUE) + (tc & TelnetOption.MAX_OPTION_VALUE)) + r0) + r0) + r0) / 5) & TelnetOption.MAX_OPTION_VALUE)) | (((((((MotionEventCompat.ACTION_POINTER_INDEX_MASK & tr) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & tc)) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & br)) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & bc)) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & cr)) / 5) & MotionEventCompat.ACTION_POINTER_INDEX_MASK)) | (((((((16711680 & tr) + (16711680 & tc)) + (16711680 & br)) + (16711680 & bc)) + (16711680 & cr)) / 5) & 16711680);
+                    ibr = br & TelnetOption.MAX_OPTION_VALUE;
+                    ibc = bc & TelnetOption.MAX_OPTION_VALUE;
+                    icr = cr & TelnetOption.MAX_OPTION_VALUE;
+                    blurPixels[cur_line_idx] = ((ViewCompat.MEASURED_STATE_MASK | (((((((tr & TelnetOption.MAX_OPTION_VALUE) + (tc & TelnetOption.MAX_OPTION_VALUE)) + ibr) + ibc) + icr) / 5) & TelnetOption.MAX_OPTION_VALUE)) | (((((((MotionEventCompat.ACTION_POINTER_INDEX_MASK & tr) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & tc)) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & br)) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & bc)) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & cr)) / 5) & MotionEventCompat.ACTION_POINTER_INDEX_MASK)) | (((((((16711680 & tr) + (16711680 & tc)) + (16711680 & br)) + (16711680 & bc)) + (16711680 & cr)) / 5) & 16711680);
                     pre_line_idx++;
                     cur_line_idx++;
                     nxt_line_idx++;
@@ -1548,13 +1553,13 @@ public class ImageFilter {
                     bc = blurPixels[nxt_line_idx];
                     cl = blurPixels[cur_line_idx - r];
                     cr = blurPixels[cur_line_idx + r];
-                    i = tc & TelnetOption.MAX_OPTION_VALUE;
-                    i = bl & TelnetOption.MAX_OPTION_VALUE;
-                    i = br & TelnetOption.MAX_OPTION_VALUE;
-                    i = bc & TelnetOption.MAX_OPTION_VALUE;
-                    i = cl & TelnetOption.MAX_OPTION_VALUE;
-                    i = cr & TelnetOption.MAX_OPTION_VALUE;
-                    blurPixels[cur_line_idx] = ((ViewCompat.MEASURED_STATE_MASK | ((((((((((tl & TelnetOption.MAX_OPTION_VALUE) + (tr & TelnetOption.MAX_OPTION_VALUE)) + r0) + r0) + r0) + r0) + r0) + r0) >> 3) & TelnetOption.MAX_OPTION_VALUE)) | ((((((((((MotionEventCompat.ACTION_POINTER_INDEX_MASK & tl) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & tr)) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & tc)) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & bl)) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & br)) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & bc)) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & cl)) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & cr)) >> 3) & MotionEventCompat.ACTION_POINTER_INDEX_MASK)) | ((((((((((16711680 & tl) + (16711680 & tr)) + (16711680 & tc)) + (16711680 & bl)) + (16711680 & br)) + (16711680 & bc)) + (16711680 & cl)) + (16711680 & cr)) >> 3) & 16711680);
+                    itc = tc & TelnetOption.MAX_OPTION_VALUE;
+                    ibl = bl & TelnetOption.MAX_OPTION_VALUE;
+                    ibr = br & TelnetOption.MAX_OPTION_VALUE;
+                    ibc = bc & TelnetOption.MAX_OPTION_VALUE;
+                    icl = cl & TelnetOption.MAX_OPTION_VALUE;
+                    icr = cr & TelnetOption.MAX_OPTION_VALUE;
+                    blurPixels[cur_line_idx] = ((ViewCompat.MEASURED_STATE_MASK | ((((((((((tl & TelnetOption.MAX_OPTION_VALUE) + (tr & TelnetOption.MAX_OPTION_VALUE)) + itc) + ibl) + ibr) + ibc) + icl) + icr) >> 3) & TelnetOption.MAX_OPTION_VALUE)) | ((((((((((MotionEventCompat.ACTION_POINTER_INDEX_MASK & tl) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & tr)) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & tc)) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & bl)) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & br)) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & bc)) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & cl)) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & cr)) >> 3) & MotionEventCompat.ACTION_POINTER_INDEX_MASK)) | ((((((((((16711680 & tl) + (16711680 & tr)) + (16711680 & tc)) + (16711680 & bl)) + (16711680 & br)) + (16711680 & bc)) + (16711680 & cl)) + (16711680 & cr)) >> 3) & 16711680);
                     pre_line_idx++;
                     cur_line_idx++;
                     nxt_line_idx++;
@@ -1565,10 +1570,10 @@ public class ImageFilter {
                     bl = blurPixels[nxt_line_idx - r];
                     bc = blurPixels[nxt_line_idx];
                     cl = blurPixels[cur_line_idx - r];
-                    i = bl & TelnetOption.MAX_OPTION_VALUE;
-                    i = bc & TelnetOption.MAX_OPTION_VALUE;
-                    i = cl & TelnetOption.MAX_OPTION_VALUE;
-                    blurPixels[cur_line_idx] = ((ViewCompat.MEASURED_STATE_MASK | (((((((tl & TelnetOption.MAX_OPTION_VALUE) + (tc & TelnetOption.MAX_OPTION_VALUE)) + r0) + r0) + r0) / 5) & TelnetOption.MAX_OPTION_VALUE)) | (((((((MotionEventCompat.ACTION_POINTER_INDEX_MASK & tl) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & tc)) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & bl)) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & bc)) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & cl)) / 5) & MotionEventCompat.ACTION_POINTER_INDEX_MASK)) | (((((((16711680 & tl) + (16711680 & tc)) + (16711680 & bl)) + (16711680 & bc)) + (16711680 & cl)) / 5) & 16711680);
+                    ibl = bl & TelnetOption.MAX_OPTION_VALUE;
+                    ibc = bc & TelnetOption.MAX_OPTION_VALUE;
+                    icl = cl & TelnetOption.MAX_OPTION_VALUE;
+                    blurPixels[cur_line_idx] = ((ViewCompat.MEASURED_STATE_MASK | (((((((tl & TelnetOption.MAX_OPTION_VALUE) + (tc & TelnetOption.MAX_OPTION_VALUE)) + ibl) + ibc) + icl) / 5) & TelnetOption.MAX_OPTION_VALUE)) | (((((((MotionEventCompat.ACTION_POINTER_INDEX_MASK & tl) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & tc)) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & bl)) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & bc)) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & cl)) / 5) & MotionEventCompat.ACTION_POINTER_INDEX_MASK)) | (((((((16711680 & tl) + (16711680 & tc)) + (16711680 & bl)) + (16711680 & bc)) + (16711680 & cl)) / 5) & 16711680);
                     pre_line_idx++;
                     cur_line_idx++;
                     nxt_line_idx++;
@@ -1581,8 +1586,8 @@ public class ImageFilter {
                     tc = blurPixels[pre_line_idx];
                     tr = blurPixels[pre_line_idx + r];
                     cr = blurPixels[cur_line_idx + r];
-                    i = cr & TelnetOption.MAX_OPTION_VALUE;
-                    blurPixels[cur_line_idx] = ((ViewCompat.MEASURED_STATE_MASK | (((((tc & TelnetOption.MAX_OPTION_VALUE) + (tr & TelnetOption.MAX_OPTION_VALUE)) + r0) / 3) & TelnetOption.MAX_OPTION_VALUE)) | (((((MotionEventCompat.ACTION_POINTER_INDEX_MASK & tc) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & tr)) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & cr)) / 3) & MotionEventCompat.ACTION_POINTER_INDEX_MASK)) | (((((16711680 & tc) + (16711680 & tr)) + (16711680 & cr)) / 3) & 16711680);
+                    icr = cr & TelnetOption.MAX_OPTION_VALUE;
+                    blurPixels[cur_line_idx] = ((ViewCompat.MEASURED_STATE_MASK | (((((tc & TelnetOption.MAX_OPTION_VALUE) + (tr & TelnetOption.MAX_OPTION_VALUE)) + icr) / 3) & TelnetOption.MAX_OPTION_VALUE)) | (((((MotionEventCompat.ACTION_POINTER_INDEX_MASK & tc) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & tr)) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & cr)) / 3) & MotionEventCompat.ACTION_POINTER_INDEX_MASK)) | (((((16711680 & tc) + (16711680 & tr)) + (16711680 & cr)) / 3) & 16711680);
                     pre_line_idx++;
                     cur_line_idx++;
                 }
@@ -1592,10 +1597,10 @@ public class ImageFilter {
                     tc = blurPixels[pre_line_idx];
                     cl = blurPixels[cur_line_idx - r];
                     cr = blurPixels[cur_line_idx + r];
-                    i = tc & TelnetOption.MAX_OPTION_VALUE;
-                    i = cl & TelnetOption.MAX_OPTION_VALUE;
-                    i = cr & TelnetOption.MAX_OPTION_VALUE;
-                    blurPixels[cur_line_idx] = ((ViewCompat.MEASURED_STATE_MASK | (((((((tl & TelnetOption.MAX_OPTION_VALUE) + (tr & TelnetOption.MAX_OPTION_VALUE)) + r0) + r0) + r0) / 5) & TelnetOption.MAX_OPTION_VALUE)) | (((((((MotionEventCompat.ACTION_POINTER_INDEX_MASK & tl) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & tr)) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & tc)) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & cl)) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & cr)) / 5) & MotionEventCompat.ACTION_POINTER_INDEX_MASK)) | (((((((16711680 & tl) + (16711680 & tr)) + (16711680 & tc)) + (16711680 & cl)) + (16711680 & cr)) / 5) & 16711680);
+                    itc = tc & TelnetOption.MAX_OPTION_VALUE;
+                    icl = cl & TelnetOption.MAX_OPTION_VALUE;
+                    icr = cr & TelnetOption.MAX_OPTION_VALUE;
+                    blurPixels[cur_line_idx] = ((ViewCompat.MEASURED_STATE_MASK | (((((((tl & TelnetOption.MAX_OPTION_VALUE) + (tr & TelnetOption.MAX_OPTION_VALUE)) + itc) + icl) + icr) / 5) & TelnetOption.MAX_OPTION_VALUE)) | (((((((MotionEventCompat.ACTION_POINTER_INDEX_MASK & tl) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & tr)) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & tc)) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & cl)) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & cr)) / 5) & MotionEventCompat.ACTION_POINTER_INDEX_MASK)) | (((((((16711680 & tl) + (16711680 & tr)) + (16711680 & tc)) + (16711680 & cl)) + (16711680 & cr)) / 5) & 16711680);
                     pre_line_idx++;
                     cur_line_idx++;
                 }
@@ -1603,8 +1608,8 @@ public class ImageFilter {
                     cl = blurPixels[cur_line_idx - r];
                     tl = blurPixels[pre_line_idx - r];
                     tc = blurPixels[pre_line_idx];
-                    i = cl & TelnetOption.MAX_OPTION_VALUE;
-                    blurPixels[cur_line_idx] = ((ViewCompat.MEASURED_STATE_MASK | (((((tl & TelnetOption.MAX_OPTION_VALUE) + (tc & TelnetOption.MAX_OPTION_VALUE)) + r0) / 3) & TelnetOption.MAX_OPTION_VALUE)) | (((((MotionEventCompat.ACTION_POINTER_INDEX_MASK & tl) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & tc)) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & cl)) / 3) & MotionEventCompat.ACTION_POINTER_INDEX_MASK)) | (((((16711680 & tl) + (16711680 & tc)) + (16711680 & cl)) / 3) & 16711680);
+                    icl = cl & TelnetOption.MAX_OPTION_VALUE;
+                    blurPixels[cur_line_idx] = ((ViewCompat.MEASURED_STATE_MASK | (((((tl & TelnetOption.MAX_OPTION_VALUE) + (tc & TelnetOption.MAX_OPTION_VALUE)) + icl) / 3) & TelnetOption.MAX_OPTION_VALUE)) | (((((MotionEventCompat.ACTION_POINTER_INDEX_MASK & tl) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & tc)) + (MotionEventCompat.ACTION_POINTER_INDEX_MASK & cl)) / 3) & MotionEventCompat.ACTION_POINTER_INDEX_MASK)) | (((((16711680 & tl) + (16711680 & tc)) + (16711680 & cl)) / 3) & 16711680);
                     pre_line_idx++;
                     cur_line_idx++;
                 }
@@ -1884,9 +1889,9 @@ public class ImageFilter {
         m[0] = 1.0d;
         m[(n + 30) - 1] = 1.0d;
         float f = (float) (pp[1].f441y - pp[0].f441y);
-        d[0] = (double) ((3.0f * r0) / ((float) (pp[1].f440x - pp[0].f440x)));
+        d[0] = (double) ((3.0f * f) / ((float) (pp[1].f440x - pp[0].f440x)));
         f = (float) (pp[n - 1].f441y - pp[n - 2].f441y);
-        d[n - 1] = (double) ((3.0f * r0) / ((float) (pp[n - 1].f440x - pp[n - 2].f440x)));
+        d[n - 1] = (double) ((3.0f * f) / ((float) (pp[n - 1].f440x - pp[n - 2].f440x)));
         double[] aa = new double[45];
         for (i = 0; i < n; i++) {
             resultdif[i] = 0.0d;
@@ -1913,15 +1918,15 @@ public class ImageFilter {
         j = 0;
         for (i = 0; i <= TelnetOption.MAX_OPTION_VALUE; i++) {
             int i2 = pp[0].f440x;
-            if (i < r0) {
+            if (i < i2) {
                 m_pCurveTable[channel][i] = pp[0].f441y;
             } else {
                 i2 = pp[n - 1].f440x;
-                if (i > r0) {
+                if (i > i2) {
                     m_pCurveTable[channel][i] = pp[n - 1].f441y;
                 } else {
                     i2 = pp[j + 1].f440x;
-                    if (i > r0) {
+                    if (i > i2) {
                         j++;
                         h = (double) (pp[j + 1].f440x - pp[j].f440x);
                         a = (((double) ((pp[j + 1].f441y - pp[j].f441y) * 3)) / (h * h)) - ((resultdif[j + 1] + (2.0d * resultdif[j])) / h);
@@ -1955,7 +1960,7 @@ public class ImageFilter {
                 int alpha1 = (newBitmap[index] >> 24) & TelnetOption.MAX_OPTION_VALUE;
                 int b = newBitmap[index] & TelnetOption.MAX_OPTION_VALUE;
                 int Alpha2 = (AlphaBitmap[index] >> 16) & TelnetOption.MAX_OPTION_VALUE;
-                newBitmap[index] = (((r0 << 24) | (((newBitmap[index] >> 16) & TelnetOption.MAX_OPTION_VALUE) << 16)) | (((newBitmap[index] >> 8) & TelnetOption.MAX_OPTION_VALUE) << 8)) | b;
+                newBitmap[index] = (((newBitmap[index] << 24) | (((newBitmap[index] >> 16) & TelnetOption.MAX_OPTION_VALUE) << 16)) | (((newBitmap[index] >> 8) & TelnetOption.MAX_OPTION_VALUE) << 8)) | b;
             }
         }
         bb.setPixels(newBitmap, 0, bmWidth, 0, 0, bmWidth, bmHeight);

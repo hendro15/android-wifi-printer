@@ -1036,6 +1036,7 @@ public abstract class MobileUtility {
 
     private void SavePrintCount(int iTotalFrame) {
         String strUploader;
+        String strTimeStamp;
         this.LOG.m386v("*************SavePrintCount", "ID: " + this.m_iSQLiteID);
         PrintingInfo printingInfo = this.m_SQLiteUtility.GetPrintingInfoById((long) this.m_iSQLiteID);
         int iLastCount = 0;
@@ -1052,7 +1053,7 @@ public abstract class MobileUtility {
             } else {
                 strProductID = this.m_strProductIDString;
             }
-            String strTimeStamp = MobileInfo.GetTimeStamp() + MobileInfo.MakeRandString(LOW_QTY_CROP);
+            strTimeStamp = MobileInfo.GetTimeStamp() + MobileInfo.MakeRandString(LOW_QTY_CROP);
             this.m_GVUploadInfo.RestoreGlobalVariable();
             this.m_iSQLiteID = (int) this.m_SQLiteUtility.InsertPrintingInfo(this.m_GVUploadInfo.GetSerialNumber(), strTimeStamp, strUploader, 0, PrinterInfo.AdjustPaperType(this.m_iPaperType, this.m_bDuplex), EncryptAndDecryptAES.MakeAESCount(this.m_Context, this.m_iPrintCount, strTimeStamp), EncryptAndDecryptAES.MakeAESCount(this.m_Context, SIZE_REDUCE, strTimeStamp), 0, PrinterInfo.ChangeProductIDValueForServer(strProductID), iTotalFrame, 0);
             this.LOG.m386v("*************NewID_" + String.valueOf(this.m_iSQLiteID), "iTotalFrame=" + iTotalFrame);

@@ -5,7 +5,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.ServiceConnection;
 import android.os.IBinder;
-import com.hiti.utility.LogManager;
+import com.example.sonic.hitiprinter.utility.LogManager;
 
 public class PrintConnection implements ServiceConnection {
     LogManager LOG;
