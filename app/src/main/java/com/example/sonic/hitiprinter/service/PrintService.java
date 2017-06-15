@@ -1,20 +1,13 @@
-package com.example.sonic.hitiprinter.hiti.print;
+package com.example.sonic.hitiprinter.service;
 
 import android.app.Notification;
 import android.app.Service;
-
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat.Builder;
+import com.example.sonic.hitiprinter.utility.LogManager;
 
-import com.example.sonic.hitiprinter.hiti.utility.LogManager;
-
-/**
- * Created by Hendro E. Prabowo on 12/06/2017.
- */
-
-public class PrintService extends Service{
-
+public class PrintService extends Service {
     private static final int PRINT_SERVICE_NOTIFICATION_ID = 18;
     LogManager LOG;
     String TAG;

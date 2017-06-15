@@ -1,10 +1,6 @@
-package com.example.sonic.hitiprinter.hiti.utility;
+package com.example.sonic.hitiprinter.utility;
 
 import android.util.Log;
-
-/**
- * Created by Hendro E. Prabowo on 12/06/2017.
- */
 
 public class LogManager {
     private int m_iEnble;

@@ -1,18 +1,13 @@
-package com.example.sonic.hitiprinter.hiti.print;
+package com.example.sonic.hitiprinter.service;
 
 import android.app.NotificationManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.ServiceConnection;
 import android.os.IBinder;
+import com.hiti.utility.LogManager;
 
-import com.example.sonic.hitiprinter.hiti.utility.LogManager;
-
-/**
- * Created by Hendro E. Prabowo on 12/06/2017.
- */
-
-public class PrintConnection implements ServiceConnection{
+public class PrintConnection implements ServiceConnection {
     LogManager LOG;
     String TAG;
     private boolean mBound;

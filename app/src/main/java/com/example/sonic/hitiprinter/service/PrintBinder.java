@@ -1,17 +1,13 @@
-package com.example.sonic.hitiprinter.hiti.print;
+package com.example.sonic.hitiprinter.service;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
-import com.example.sonic.hitiprinter.hiti.print.PrintService.IPrintService;
-import com.example.sonic.hitiprinter.hiti.print.PrintService.NotifyInfo;
-import com.example.sonic.hitiprinter.hiti.print.PrintConnection.IConnection;
+import com.example.sonic.hitiprinter.service.PrintConnection.IConnection;
+import com.example.sonic.hitiprinter.service.PrintService.IPrintService;
+import com.example.sonic.hitiprinter.service.PrintService.NotifyInfo;
 
-/**
- * Created by Hendro E. Prabowo on 12/06/2017.
- */
-
-public class PrintBinder extends Binder{
+public class PrintBinder extends Binder {
     PrintService service;
 
     public interface IBinder {
@@ -66,7 +62,7 @@ public class PrintBinder extends Binder{
         Intent intent = new Intent(context, PrintService.class);
         PrintConnection connection = new PrintConnection(context);
         connection.setListener(new C08011(connection, callback, intent));
-        context.bindService(intent, connection, Context.BIND_AUTO_CREATE);
+        context.bindService(intent, connection, 1);
         return connection;
     }
 
