@@ -6,33 +6,47 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.print.PrintManager;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.os.EnvironmentCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sonic.hitiprinter.R;
 import com.example.sonic.hitiprinter.commons.PrinterManager;
 import com.example.sonic.hitiprinter.printerprotocol.request.HitiPPR_PrinterCommandNew;
 import com.example.sonic.hitiprinter.printerprotocol.utility.MobileUtility;
+import com.example.sonic.hitiprinter.printerprotocol.utility.PrinterInfo;
 import com.example.sonic.hitiprinter.service.PrintBinder;
 import com.example.sonic.hitiprinter.service.PrintBinder.IBinder;
 import com.example.sonic.hitiprinter.service.PrintConnection;
 import com.example.sonic.hitiprinter.service.PrintService;
 import com.example.sonic.hitiprinter.service.PrintService.NotifyInfo;
+import com.example.sonic.hitiprinter.trace.GlobalVariable_WifiAutoConnectInfo;
 import com.example.sonic.hitiprinter.ui.drawview.garnishitem.utility.EditMeta;
 import com.example.sonic.hitiprinter.ui.drawview.garnishitem.utility.EditMetaUtility;
 import com.example.sonic.hitiprinter.utility.LogManager;
+import com.example.sonic.hitiprinter.utility.Verify;
+import com.example.sonic.hitiprinter.utility.Verify.ThreadMode;
 import com.example.sonic.hitiprinter.utility.Verify.PrintMode;
+import com.example.sonic.hitiprinter.utility.dialog.MSGListener;
+import com.example.sonic.hitiprinter.utility.dialog.ShowMSGDialog;
 import com.example.sonic.hitiprinter.value.C0349R;
+
+import org.xmlpull.v1.XmlPullParser;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -42,9 +56,11 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int GLOSSY_TEXTURE = 0;
     private static final int MATTE_TEXTURE = 1;
+    private GlobalVariable_WifiAutoConnectInfo m_WifiInfo;
 
     protected Button btn_gallery, btn_print;
     protected ImageView iv_image;
+    protected TextView tv_printModel;
     protected Intent i;
     protected PrinterManager printerManager;
     protected LogManager log;
@@ -52,12 +68,38 @@ public class MainActivity extends AppCompatActivity {
     protected MobileUtility m_MobileUtility;
     protected EditMeta m_EditMeta;
     protected EditMetaUtility m_EditMetaUtility = null;
+    protected ShowMSGDialog m_ShowMSGDialog;
+
+    private String m_strCurrentSSID;
+    private String m_strLastSSID;
+    private String m_strSecurityKey;
 
     PrintMode m_PrintMode;
     String TAG;
     String IP;
     PrintMode printMode;
     int m_iPort;
+
+    class C07963 implements PrinterInfo.Callback {
+        C07963() {
+        }
+
+        public String setModelTextP310W() {
+            return MainActivity.this.getString(C0349R.string.P310W);
+        }
+
+        public String setModelTextP520L() {
+            return MainActivity.this.getString(C0349R.string.P520L);
+        }
+
+        public String setModelTextP750L() {
+            return MainActivity.this.getString(C0349R.string.P750L);
+        }
+
+        public String setModelTextP530D() {
+            return MainActivity.this.getString(C0349R.string.P530D);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,12 +112,14 @@ public class MainActivity extends AppCompatActivity {
         this.m_iPort = HitiPPR_PrinterCommandNew.DEFAULT_AP_MODE_PORT;
         setLayout();
         onClick();
+        CheckWifi();
     }
 
     protected void setLayout() {
         btn_gallery = (Button) findViewById(R.id.btn_gallery);
         btn_print = (Button) findViewById(R.id.btn_print);
         iv_image = (ImageView) findViewById(R.id.iv_image);
+        tv_printModel = (TextView)findViewById(R.id.tv_printmodel);
     }
 
     protected void onClick() {
@@ -184,6 +228,77 @@ public class MainActivity extends AppCompatActivity {
         if(this.printConnection != null){
             PrintBinder.stop(this, this.printConnection);
         }
+    }
+
+    private void CheckWifi() {
+        this.log.m386v(this.TAG, "CheckWifi");
+        NetworkInfo mWifi = ((ConnectivityManager) getSystemService("connectivity")).getNetworkInfo(MATTE_TEXTURE);
+        this.m_WifiInfo = new GlobalVariable_WifiAutoConnectInfo(this);
+        this.m_WifiInfo.RestoreGlobalVariable();
+        this.m_strCurrentSSID = GetNowSSID();
+        this.m_strLastSSID = this.m_WifiInfo.GetSSID();
+        this.m_strSecurityKey = this.m_WifiInfo.GetPassword();
+//        this.tv_printModel.setText(getString(C0349R.string.CONNECTING));
+        this.m_strLastSSID = CleanSSID(this.m_strLastSSID);
+        this.m_strCurrentSSID = CleanSSID(this.m_strCurrentSSID);
+        if (mWifi.isConnected()) {
+            if (this.m_strCurrentSSID.contains(this.m_strLastSSID)) {
+                this.tv_printModel.setText(this.m_strCurrentSSID);
+//                if (this.m_PrintMode == PrintMode.Snap) {
+//                    ShowPrinterListDialog();
+//                    return;
+//                }
+                return;
+            }
+            this.m_ShowMSGDialog.CreateConnectWifiHintDialog(this.m_strCurrentSSID, this.m_strLastSSID);
+        } else if (this.m_strLastSSID.length() == 0 || this.m_strLastSSID.contains(EnvironmentCompat.MEDIA_UNKNOWN)) {
+//            ShowNoWiFiDialog();
+        } else {
+            this.m_ShowMSGDialog.ShowWaitingHintDialog(ThreadMode.AutoWifi, getString(C0349R.string.CONN_SEARCHING));
+            this.tv_printModel.setText(getString(C0349R.string.CONN_SEARCHING));
+//            this.m_wifiAutoConnect = new AutoWifiConnect(this, this.m_strLastSSID, this.m_strSecurityKey);
+//            this.m_wifiAutoConnect.execute(new Void[GLOSSY_TEXTURE]);
+        }
+    }
+
+    String CleanSSID(String strSSID){
+        if(strSSID.contains("\"")){
+            return strSSID.split("\"")[MATTE_TEXTURE];
+        }
+        return strSSID;
+    }
+
+    void OpenWifi() {
+        startActivityForResult(new Intent("android.settings.WIFI_SETTINGS"), 10);
+    }
+
+    private String GetNowSSID(){
+        String strSSID;
+        WifiInfo wifiInfo = ((WifiManager) getSystemService("wifi")).getConnectionInfo();
+        if(wifiInfo.getSSID() == null){
+            strSSID = XmlPullParser.NO_NAMESPACE;
+        } else {
+            strSSID = wifiInfo.getSSID();
+        }
+        return CleanSSID(strSSID);
+    }
+
+    public void ShowNoWiFiDialog() {
+        this.m_ShowMSGDialog.StopMSGDialog();
+        this.m_ShowMSGDialog.SetMSGListener(new MSGListener() {
+            public void OKClick() {
+                MainActivity.this.OpenWifi();
+            }
+
+            public void CancelClick() {
+//                MainActivity.this.SetPrintButtonStatus(false);
+//                PrintViewActivity.this.PrintStausAndCount(PrintViewActivity.this.getString(C0349R.string.PRINT_PAUSE), -1);
+            }
+
+            public void Close() {
+            }
+        });
+        this.m_ShowMSGDialog.ShowMessageDialog(getString(C0349R.string.PLEASE_SELECT_NETWORK), getString(C0349R.string.UNABLE_TO_CONNECT_TO_PRINTER));
     }
 }
 

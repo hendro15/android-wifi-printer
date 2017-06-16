@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">HiTi Printer</string>
+    <string name="title_activity_print_view">PrintViewActivity</string>
 </resources>
