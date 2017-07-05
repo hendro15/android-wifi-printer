@@ -3,6 +3,8 @@ package com.example.sonic.hitiprinter.service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
+import android.util.Log;
+
 import com.example.sonic.hitiprinter.service.PrintConnection.IConnection;
 import com.example.sonic.hitiprinter.service.PrintService.IPrintService;
 import com.example.sonic.hitiprinter.service.PrintService.NotifyInfo;
@@ -31,6 +33,8 @@ public class PrintBinder extends Binder {
                 if (C08011.this.val$callback != null) {
                     service.startForeground(service.setNotification(C08011.this.val$callback.setNotifyInfo(service.getNotifyInfo())));
                     C08011.this.val$callback.startPrint();
+                } else {
+                    Log.i("PrintBinder", "val$callback == null");
                 }
             }
         }

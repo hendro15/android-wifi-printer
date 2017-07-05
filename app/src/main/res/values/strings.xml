@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">HiTi Printer</string>
     <string name="title_activity_print_view">PrintViewActivity</string>
+    <string name="PLEASE_SELECT_NETWORK">Please select a Wi-Fi network</string>
+    <string name="UNABLE_TO_CONNECT_TO_PRINTER">Cannot connect to printer</string>
 </resources>
